@@ -1,0 +1,4 @@
+package levels
+
+class Outpost {
+}
