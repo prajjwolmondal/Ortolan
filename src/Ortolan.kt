@@ -1,24 +1,33 @@
-import levels.Intro
 import levels.LevelLoader
 import user.Player
-import utils.*
+import utils.UserPromptGenerator
 import vehicles.PlayerShip
 
+val userPromptGenerator = UserPromptGenerator()
+
 fun main(){
-    println("Welcome to Ortolan")
-    println("This is a science fiction game")
-    getPlayerInfo()
+    userPromptGenerator.printText("Welcome to Ortolan")
+    userPromptGenerator.printText("This is a science fiction game")
+    startGame(getPlayerInfo())
 }
 
-fun getPlayerInfo(){
-    val playerName = getValidString("What would you like to name your character?")
-    val playerAge = getValidInt("How old is your character? (0-100)")
-    val playerGender = getValidString("What is your gender?")
-    val playerShipName = getValidString("What do you want to name your ship?")
+fun getPlayerInfo(): Player{
+    val userPromptGenerator = UserPromptGenerator()
+    val playerName = userPromptGenerator.getStringInput("What would you like to name your character?",
+        "Enter a name that's not blank. If you can't think of one, use \"dummy\". " +
+                "I think it fits your real life character :)")
+    val playerAge = userPromptGenerator.getIntResponse("How old is your character? (0-100)",
+        "Literally any number between 0 and 100 will do")
+    val playerGender = userPromptGenerator.getStringInput("What is your gender?","")
+    val playerShipName = userPromptGenerator.getStringInput("What do you want to name your ship?","")
     val player = Player(playerName, playerAge, playerGender, PlayerShip(playerShipName))
     player.describeUser()
     player.printStats()
     player.ship.describeShip()
-    val levelLoader = LevelLoader()
+    return player
+}
+
+fun startGame(player: Player){
+    val levelLoader = LevelLoader(player)
     levelLoader.runLevel(1)
 }
