@@ -11,21 +11,22 @@ package utils
 class UserPromptGenerator {
 
     private val defaultUserQuestion = "What do you do?"
+    private val defaultSpecialResponse = ""
 
-    fun getStringInput(userQuestion: String, specialResponse: String): String{
+    fun getStringInput(userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): String{
         return getValidString(userQuestion, specialResponse)
     }
 
-    fun getStringInput(inputs: Array<String>, userQuestion: String = defaultUserQuestion, specialResponse: String = ""): String{
+    fun getStringInput(inputs: Array<String>, userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): String{
         printOptions(inputs)
         return getValidString(userQuestion, specialResponse)
     }
 
-    fun getIntResponse(userQuestion: String, specialResponse: String): Int{
+    fun getIntResponse(userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): Int{
         return getValidInt(userQuestion, specialResponse)
     }
 
-    fun getIntResponse(inputs: Array<String>, userQuestion: String = defaultUserQuestion, specialResponse: String = ""): Int{
+    fun getIntResponse(inputs: Array<String>, userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): Int{
         printOptions(inputs)
         return getValidInt(userQuestion, specialResponse)
     }
@@ -34,8 +35,8 @@ class UserPromptGenerator {
         println(input)
     }
 
-    fun printTexts(inputs: Array<String>){
-        for (i in 1..inputs.size){
+    fun printText(inputs: Array<String>){
+        for (i in inputs.indices){
             println(inputs[i])
         }
     }

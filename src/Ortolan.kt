@@ -8,7 +8,8 @@ val userPromptGenerator = UserPromptGenerator()
 fun main(){
     userPromptGenerator.printText("Welcome to Ortolan")
     userPromptGenerator.printText("This is a science fiction game")
-    startGame(getPlayerInfo())
+    val levelLoader = LevelLoader((getPlayerInfo()))
+    levelLoader.runLevels()
 }
 
 fun getPlayerInfo(): Player{
@@ -25,9 +26,4 @@ fun getPlayerInfo(): Player{
     player.printStats()
     player.ship.describeShip()
     return player
-}
-
-fun startGame(player: Player){
-    val levelLoader = LevelLoader(player)
-    levelLoader.runLevel(1)
 }

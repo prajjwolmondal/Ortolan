@@ -5,9 +5,10 @@ import weapons.Weapon
 import kotlin.random.Random
 
 
-class PlayerShip constructor(var shipName: String, override var shipClass: String = "Epoch",
-                             override var shipHealth: Int = 100, var shipLicenceNum: String = "XTNT40-1E",
-                             override var shipShield: Int = 50, override var crewCapacity: Int = 2): Ship {
+class PlayerShip constructor(private var shipName: String,  private var shipLicenceNum: String = "XTNT40-1E",
+                             private var shipFuel: Int = 3, override var shipClass: String = "Epoch",
+                             override var shipHealth: Int = 100, override var shipShield: Int = 50,
+                             override var crewCapacity: Int = 2): Ship {
 
     private var weapon: Weapon = VoidCannon()
 
