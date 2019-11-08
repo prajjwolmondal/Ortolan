@@ -48,13 +48,12 @@ class LevelLoader(player: Player) {
     }
 
     private fun getPlayersNextMove(option1: Level, option2: Level): Int{
-        if ((option1.getLevelName()=="Geomagnetic Storm") or (option2.getLevelName()=="Asteroid Belt")){
-            this.userPromptGenerator.printText(arrayOf("Go to the ${option1.getLevelName()}?",
+        return if ((option1.getLevelName()=="geomagnetic storm") or (option2.getLevelName()=="asteroid belt")){
+            this.userPromptGenerator.getIntResponse(arrayOf("Go to the ${option1.getLevelName()}?",
                 "Go to the ${option2.getLevelName()}?"))
         } else {
-            this.userPromptGenerator.printText(arrayOf("Go to Planet ${option1.getLevelName()}?",
+            this.userPromptGenerator.getIntResponse(arrayOf("Go to Planet ${option1.getLevelName()}?",
                 "Go to Planet ${option2.getLevelName()}?"))
-            }
-        return this.userPromptGenerator.getIntResponse()
+        }
     }
 }
