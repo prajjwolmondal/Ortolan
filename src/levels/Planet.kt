@@ -3,7 +3,7 @@ package levels
 import user.Player
 import utils.UserPromptGenerator
 
-class Planet constructor(private val planetName: String, playerModel: Player): Level(playerModel) {
+class Planet constructor(private val planetName: String, playerModel: Player) : Level(playerModel) {
 
     private val userPromptGenerator = UserPromptGenerator()
 
@@ -11,8 +11,10 @@ class Planet constructor(private val planetName: String, playerModel: Player): L
         return this.planetName
     }
 
-    init {
+    override fun startLevel() {
         //TODO: Describe arrival at planet, followed by a random description
+        println("You arrive at $planetName")
+        levelTurn()
     }
 
 }

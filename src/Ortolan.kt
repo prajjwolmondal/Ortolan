@@ -1,7 +1,7 @@
 import levels.LevelLoader
 import user.Player
 import utils.UserPromptGenerator
-import vehicles.PlayerShip
+import vehicles.Epoch
 
 val userPromptGenerator = UserPromptGenerator()
 
@@ -21,7 +21,7 @@ fun getPlayerInfo(): Player{
         "Literally any number between 0 and 100 will do")
     val playerGender = userPromptGenerator.getStringInput("What is your gender?","")
     val playerShipName = userPromptGenerator.getStringInput("What do you want to name your ship?","")
-    val player = Player(playerName, playerAge, playerGender, PlayerShip(playerShipName))
+    val player = Player(playerName, playerAge, playerGender, Epoch(playerShipName))
     player.describeUser()
     player.printStats()
     player.ship.describeShip()
