@@ -19,9 +19,8 @@ fun getPlayerInfo(): Player{
                 "I think it fits your real life character :)")
     val playerAge = userPromptGenerator.getIntResponse("How old is your character? (0-100)",
         "Literally any number between 0 and 100 will do")
-    val playerGender = userPromptGenerator.getStringInput("What is your gender?","")
     val playerShipName = userPromptGenerator.getStringInput("What do you want to name your ship?","")
-    val player = Player(playerName, playerAge, playerGender, Epoch(playerShipName))
+    val player = Player(playerName, playerAge, Epoch(playerShipName))
     player.describeUser()
     player.printStats()
     player.ship.describeShip()

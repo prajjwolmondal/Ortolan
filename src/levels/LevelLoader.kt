@@ -31,17 +31,17 @@ class LevelLoader(player: Player) {
     fun runLevels(){
         this.introLvl.startLevel()
         when (getPlayersNextMove(planet1a, planet1b)){
-            1 -> planet1a.startLevel()
-            2 -> planet1b.startLevel()
+            0 -> planet1a.startLevel()
+            1 -> planet1b.startLevel()
         }
         outpost.startLevel()
         when (getPlayersNextMove(anomaly, astroidBelt)){
-            1 -> anomaly.startLevel()
-            2 -> astroidBelt.startLevel()
+            0 -> anomaly.startLevel()
+            1 -> astroidBelt.startLevel()
         }
         when (getPlayersNextMove(planet2a, planet2b)){
-            1 -> planet2a.startLevel()
-            2 -> planet2b.startLevel()
+            0 -> planet2a.startLevel()
+            1 -> planet2b.startLevel()
         }
         outpost.startLevel()
         boss.startLevel()

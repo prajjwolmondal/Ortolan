@@ -8,4 +8,10 @@ class Outpost (playerModel: Player): Level(playerModel) {
         //TODO: Describe arrival at outpost, followed by description
     }
 
+    override fun startLevel() {
+        val userPromptGenerator = getuserPromptGenerator()
+        userPromptGenerator.printText("You arrive at an outpost. You dock the ship and open the trading terminal.")
+
+    }
+
 }

@@ -2,9 +2,15 @@ package vehicles
 
 import kotlin.random.Random
 
-open class Ship( private var shipName: String, private var shipClass: String = "Epoch", var health: Int = 100,
-                 private var shieldCapacity: Int = 100, private var crewCount: Int = 1, private var fuelLeft: Int = 3,
-                 private var licenceNum: String = "XTNT40-1E") {
+open class Ship( private var shipName: String, private var shipClass: String = "Epoch") {
+
+    var health: Int = 100
+    var shieldCapacity: Int = 100
+    var fuelLeft: Int = 3
+
+    private var licenceNum: String = "XTNT40-1E"
+    private var repairAmnt: Int = 10
+    private var crewCount: Int = 1
 
     //TODO: Add the weapon vars
 
@@ -16,12 +22,12 @@ open class Ship( private var shipName: String, private var shipClass: String = "
                             "${this.shipName}. Game over."
             )
         } else {
-            println("Ship health is now at: ${this.health}")
+            println("${this.shipName} health is now at: ${this.health}")
         }
     }
 
-    fun repairShip(repairAmnt: Int) {
-        this.health += repairAmnt
+    fun repairShip() {
+        this.health += this.repairAmnt
         if (this.health > 100) this.health = 100
         println("Ship health is now at: ${this.health}")
     }

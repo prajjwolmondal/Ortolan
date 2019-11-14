@@ -25,6 +25,7 @@ class Intro(var playerModel: Player) : Level(playerModel) {
             printText("Expom Command: The Aurora station. We have uploaded the safest possible navigation routes" +
                     " to your mainframe. As stated earlier, the remaining 999,995,000 credits will be deposited into" +
                     "your account upon delivery of the package.")
+            println("You close the dock and engage your engine drive.")
         }
     }
 
