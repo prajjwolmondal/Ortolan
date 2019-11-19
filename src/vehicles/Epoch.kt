@@ -11,7 +11,7 @@ class Epoch(var shipName: String) :Ship(shipName) {
 
     fun fireWeapons(): Int {
         val weaponDamage: Int = (this.weapon.damage + this.weapon.damage*criticalMultiplier).toInt()
-        print("Firing the ${this.weapon.getWeaponName()}. It does $weaponDamage damage to the enemy's hull. ")
+        print("Firing ${this.weapon.getWeaponName()}. It does $weaponDamage damage to the enemy's hull. ")
         return weaponDamage
     }
 

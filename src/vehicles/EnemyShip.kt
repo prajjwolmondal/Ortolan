@@ -34,6 +34,8 @@ class EnemyShip() {
         }
     }
 
+    fun getShipName(): String{return "The Doomsday"}
+
     fun describe(){
         println("You're hailed by a pirate ship calling itself \"The Doomsday\" ")
     }

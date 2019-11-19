@@ -1,40 +1,62 @@
 package vehicles
 
+import utils.UserPromptGenerator
 import kotlin.random.Random
+import kotlin.system.exitProcess
 
 open class Ship( private var shipName: String, private var shipClass: String = "Epoch") {
 
     var health: Int = 100
     var shieldCapacity: Int = 100
-    var fuelLeft: Int = 3
 
+    private var fuelLeft: Int = 3
     private var licenceNum: String = "XTNT40-1E"
     private var repairAmnt: Int = 10
     private var crewCount: Int = 1
+    private val userPromptGenerator = UserPromptGenerator()
 
     //TODO: Add the weapon vars
 
     fun takeDamage(damage: Int) {
         this.health -= damage
         if (this.health <= 0) {
-            println(
+            userPromptGenerator.printText(
                     "The last shot ruptures the engine drive causing an explosion to rupture through the " +
                             "${this.shipName}. Game over."
             )
         } else {
-            println("${this.shipName} health is now at: ${this.health}")
+            userPromptGenerator.printText("${this.shipName} health is now at: ${this.health}")
         }
+    }
+
+    fun modifyFuel(modifyAmt: Int){
+        val fuelAwardedChance = Random.nextInt(0,10)
+        if (modifyAmt >= 0) {
+            if ((fuelAwardedChance > 8) and (this.fuelLeft <= 2)) {
+                this.fuelLeft = if (this.fuelLeft + modifyAmt > 3) {
+                    3
+                } else {
+                    this.fuelLeft + modifyAmt
+                }
+            }
+        } else {
+            if (this.fuelLeft+modifyAmt <= 0){
+                gameOver()
+            }
+            this.fuelLeft += modifyAmt
+        }
+        userPromptGenerator.printText("You have ${this.fuelLeft} fuel left")
     }
 
     fun repairShip() {
         this.health += this.repairAmnt
         if (this.health > 100) this.health = 100
-        println("Ship health is now at: ${this.health}")
+        userPromptGenerator.printText("Ship health is now at: ${this.health}")
     }
 
     fun renameShip(newName: String) {
         this.shipName = newName
-        println("You've renamed your ship to - ${this.shipName}")
+        userPromptGenerator.printText("You've renamed your ship to - ${this.shipName}")
     }
 
     fun changeLicencePlate() {
@@ -43,13 +65,18 @@ open class Ship( private var shipName: String, private var shipClass: String = "
         this.licenceNum = "XTNT$randomNumber-$randomEndNumber E"
     }
 
+    private fun gameOver() {
+        print("Game over")
+        exitProcess(0)
+    }
+
     fun describeShip() {
         when (this.shipClass) {
             "Halison" -> println()
             "Poseidon" -> println()
             "Shiva" -> println()
             else -> {
-                println(
+                userPromptGenerator.printText(
                         "You own the ${this.shipName}. A ${this.shipClass} class vehicle. Its got one main engine, and " +
                                 "one main artillery cannon. Its got rooms for a 4 person crew, although you could probably " +
                                 "squeeze in about 10. The ships licence number is: ${this.licenceNum}"

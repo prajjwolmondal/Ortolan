@@ -27,14 +27,41 @@ open class Level(private var playerModel: Player) {
         //TODO: Implement the level damages (some will disrupt shield, some will damage hull)
 
         val playerShip = this.playerModel.ship
+        var response: Int = 0
+
         while ((playerShip.health>0) and (levelShip.getHealth()>0)){
             userPromptGenerator.printText("You can do the following: ")
-            val response = userPromptGenerator.getIntResponse(arrayOf("Attack enemy ship", "Repair your ship"))
+            response = userPromptGenerator.getIntResponse(arrayOf("Attack enemy ship", "Repair your ship"))
             if (response==0) levelShip.takeDamage(playerShip.fireWeapons()) else playerShip.repairShip()
-            if (levelShip.getHealth() > 0) playerShip.takeDamage(levelShip.fireWeapons())
+            if (this.levelShip.getHealth() > 0) playerShip.takeDamage(this.levelShip.fireWeapons())
         }
+        userPromptGenerator.printText("Congratulations! You've defeated ${this.levelShip.getShipName()}")
 
         //TODO: Award player rewards for winning battle (fuel & credits)
+        awardPlayerRewards()
+
+        userPromptGenerator.printText("What would you like to do to celebrate your victory?")
+        response = userPromptGenerator.getIntResponse(arrayOf("Move on", "Repair your ship", "Rename your ship"))
+        while (response!=0){
+            if (response==1) {
+                playerShip.repairShip()
+            }
+            else if (response==2) {
+                val newShipName = userPromptGenerator.getStringInput("What would you like to call your ship?")
+                playerShip.renameShip(newShipName)
+            }
+        }
+    }
+
+    private fun awardPlayerRewards(){
+        var creditAwarded = 0
+        creditAwarded = if (playerModel.credits <=50) {
+            (playerModel.credits * .25).toInt()
+        } else {
+            (playerModel.credits * .10).toInt()
+        }
+        playerModel.addCredits(creditAwarded)
+        playerModel.ship.modifyFuel(-1)
 
     }
 

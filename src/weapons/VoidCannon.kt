@@ -13,7 +13,7 @@ class VoidCannon: Weapon() {
     }
 
     fun getWeaponName(): String{
-        return "Epoch"
+        return "The Epoch"
     }
 
 }
