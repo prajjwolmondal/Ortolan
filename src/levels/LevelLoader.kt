@@ -11,16 +11,6 @@ class LevelLoader(player: Player) {
     private var planetNames = arrayListOf<String>("Tritan","OA", "Planet J586", "Reach", "Chiron")
     private val userPromptGenerator = UserPromptGenerator()
 
-    private val planet1a = Planet(getRandomPlanetName(), playerModel)
-    private val planet1b = Planet(getRandomPlanetName(), playerModel)
-    private val outpost = Outpost(playerModel)
-    private val anomaly = Anomaly(playerModel)
-    private val astroidBelt = AstroidBelt(playerModel)
-    private val planet2a = Planet(getRandomPlanetName(), playerModel)
-    private val planet2b = Planet(getRandomPlanetName(), playerModel)
-    private val boss = Boss(playerModel)
-
-
     private fun getRandomPlanetName(): String{
         val planetIndex =  Random.nextInt(0, planetNames.size)
         val planetName = planetNames[planetIndex]
@@ -29,22 +19,33 @@ class LevelLoader(player: Player) {
     }
 
     fun runLevels(){
-        this.introLvl.startLevel()
+
+        // TODO: Move planet initialization to individual Level level with each level running the next level
+        val planet1a = Planet(getRandomPlanetName(), playerModel)
+        val planet1b = Planet(getRandomPlanetName(), playerModel)
+        val outpost = Outpost(playerModel)
+        val anomaly = Anomaly(playerModel)
+        val astroidBelt = AstroidBelt(playerModel)
+        val planet2a = Planet(getRandomPlanetName(), playerModel)
+        val planet2b = Planet(getRandomPlanetName(), playerModel)
+        val boss = Boss(playerModel)
+        this.introLvl.startLevel(outpost.getLevelName())
         when (getPlayersNextMove(planet1a, planet1b)){
-            1 -> planet1a.startLevel()
-            2 -> planet1b.startLevel()
+            0 -> planet1a.startLevel(outpost.getLevelName())
+            1 -> planet1b.startLevel(outpost.getLevelName())
         }
-        outpost.startLevel()
+        outpost.startLevel(outpost.getLevelName())
         when (getPlayersNextMove(anomaly, astroidBelt)){
-            1 -> anomaly.startLevel()
-            2 -> astroidBelt.startLevel()
+            0 -> anomaly.startLevel(outpost.getLevelName())
+            1 -> astroidBelt.startLevel(outpost.getLevelName())
         }
+        outpost.startLevel(outpost.getLevelName())
         when (getPlayersNextMove(planet2a, planet2b)){
-            1 -> planet2a.startLevel()
-            2 -> planet2b.startLevel()
+            0 -> planet2a.startLevel(outpost.getLevelName())
+            1 -> planet2b.startLevel(outpost.getLevelName())
         }
-        outpost.startLevel()
-        boss.startLevel()
+        outpost.startLevel(outpost.getLevelName())
+        boss.startLevel(outpost.getLevelName())
     }
 
     private fun getPlayersNextMove(option1: Level, option2: Level): Int{

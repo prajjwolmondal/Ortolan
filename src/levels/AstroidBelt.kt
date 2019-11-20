@@ -2,7 +2,7 @@ package levels
 
 import user.Player
 
-class AstroidBelt (playerModel: Player): Level(playerModel) {
+class AstroidBelt(playerModel: Player) : Level(playerModel) {
 
     private val astroidBeltName = "asteroid belt"
 

@@ -13,20 +13,24 @@ class UserPromptGenerator {
     private val defaultUserQuestion = "What do you do?"
     private val defaultSpecialResponse = ""
 
-    fun getStringInput(userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): String{
+    fun getStringInput(userQuestion: String = defaultUserQuestion,
+                       specialResponse: String = defaultSpecialResponse): String{
         return getValidString(userQuestion, specialResponse)
     }
 
-    fun getStringInput(inputs: Array<String>, userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): String{
+    fun getStringInput(inputs: Array<String>, userQuestion: String = defaultUserQuestion,
+                       specialResponse: String = defaultSpecialResponse): String{
         printOptions(inputs)
         return getValidString(userQuestion, specialResponse)
     }
 
-    fun getIntResponse(userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): Int{
+    fun getIntResponse(userQuestion: String = defaultUserQuestion,
+                       specialResponse: String = defaultSpecialResponse): Int{
         return getValidInt(userQuestion, specialResponse)
     }
 
-    fun getIntResponse(inputs: Array<String>, userQuestion: String = defaultUserQuestion, specialResponse: String = defaultSpecialResponse): Int{
+    fun getIntResponse(inputs: Array<String>, userQuestion: String = defaultUserQuestion,
+                       specialResponse: String = defaultSpecialResponse): Int{
         printOptions(inputs)
         return getValidInt(userQuestion, specialResponse)
     }
