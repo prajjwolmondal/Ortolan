@@ -2,10 +2,12 @@ package levels
 
 import user.Player
 
-class Intro(var playerModel: Player) : Level(playerModel) {
+class Intro(private var playerModel: Player) : Level(playerModel) {
 
-    override fun startLevel() {
-        printText(
+    private val userPromptGenerator = getuserPromptGenerator()
+
+    override fun startLevel(levelName: String) {
+        userPromptGenerator.printText(
             arrayOf(
                 "You open the door to you helm and head for the mainframe. You enter your credentials. It " +
                 "accepts and logs you in.", "\"You have a new high priority mission from the Expom Command\" it lets " +
@@ -18,11 +20,12 @@ class Intro(var playerModel: Player) : Level(playerModel) {
         val questions = arrayOf("Accept the mission", "I don't need this shit. Find someone else")
         playerResponse = askPlayerForResponse(questions)
         if (playerResponse==1){
+            userPromptGenerator.printText("Expom Command: You ")
             gameOver()
         } else {
-            printText("<Opening dock>")
-            printText("You: What's the destination? ")
-            printText("Expom Command: The Aurora station. We have uploaded the safest possible navigation routes" +
+            userPromptGenerator.printText("<Opening dock>")
+            userPromptGenerator.printText("You: What's the destination? ")
+            userPromptGenerator.printText("Expom Command: The Aurora station. We have uploaded the safest possible navigation routes" +
                     " to your mainframe. As stated earlier, the remaining 999,995,000 credits will be deposited into" +
                     "your account upon delivery of the package.")
             println("You close the dock and engage your engine drive.")

@@ -23,7 +23,7 @@ open class Level(private var playerModel: Player) {
         return "Forgot to override getLevelName()"
     }
 
-    open fun levelTurn() {
+    open fun levelTurn(nextLevelName: String) {
         //TODO: Implement the level damages (some will disrupt shield, some will damage hull)
 
         val playerShip = this.playerModel.ship
@@ -32,7 +32,12 @@ open class Level(private var playerModel: Player) {
         while ((playerShip.health>0) and (levelShip.getHealth()>0)){
             userPromptGenerator.printText("You can do the following: ")
             response = userPromptGenerator.getIntResponse(arrayOf("Attack enemy ship", "Repair your ship"))
-            if (response==0) levelShip.takeDamage(playerShip.fireWeapons()) else playerShip.repairShip()
+            if (response==0) {
+                levelShip.takeDamage(playerShip.fireWeapons())
+            }else if (response==666) {
+                levelShip.takeDamage(levelShip.getHealth())
+            }
+            else playerShip.repairShip()
             if (this.levelShip.getHealth() > 0) playerShip.takeDamage(this.levelShip.fireWeapons())
         }
         userPromptGenerator.printText("Congratulations! You've defeated ${this.levelShip.getShipName()}")
@@ -41,8 +46,9 @@ open class Level(private var playerModel: Player) {
         awardPlayerRewards()
 
         userPromptGenerator.printText("What would you like to do to celebrate your victory?")
-        response = userPromptGenerator.getIntResponse(arrayOf("Move on", "Repair your ship", "Rename your ship"))
+        response = 1
         while (response!=0){
+            response = userPromptGenerator.getIntResponse(arrayOf("Move on", "Repair your ship", "Rename your ship"))
             if (response==1) {
                 playerShip.repairShip()
             }
@@ -51,6 +57,7 @@ open class Level(private var playerModel: Player) {
                 playerShip.renameShip(newShipName)
             }
         }
+        userPromptGenerator.printText("You engage your engine drive and head towards $nextLevelName")
     }
 
     private fun awardPlayerRewards(){
@@ -69,21 +76,13 @@ open class Level(private var playerModel: Player) {
         return this.userPromptGenerator
     }
 
-    open fun startLevel() {
+    open fun startLevel(levelName: String) {
         this.userPromptGenerator.printText("startLevel() not implemented :(")
 
     }
 
     open fun askPlayerForResponse(options: Array<String>): Int {
         return userPromptGenerator.getIntResponse(options)
-    }
-
-    open fun printText(input: String) {
-        userPromptGenerator.printText(input)
-    }
-
-    open fun printText(inputs: Array<String>) {
-        userPromptGenerator.printText(inputs)
     }
 
     open fun gameOver() {
