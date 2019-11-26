@@ -2,7 +2,7 @@ package weapons
 
 class VoidCannon: Weapon() {
 
-    private var userPromptGenerator = getuserPromptGenerator()
+    val userPromptGenerator = getuserPromptGenerator()
 
     override fun describe() {
         userPromptGenerator.printText(arrayOf("The Void Cannon is a heavy artillery weapon. Developed by Flux Industries, its the primary weapon " +
