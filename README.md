@@ -12,7 +12,9 @@ planet, and obstacles in your path.
    ~~1. Define additional weapons~~
    ~~2. Add in outpost functionality to sell weapons~~
    ~~3. Modify Ships to be upgradeable~~
-4. Add in game save & load capability
-5. Define all existing levels
+4. Define all existing levels
+5. Add in game save & load capability
 6. Add in ship fighting functionality
+7. Define additional ship types
+8.  Update Outpost to sell ships to user
 7. TBD
