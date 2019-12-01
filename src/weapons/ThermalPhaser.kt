@@ -1,10 +1,12 @@
 package weapons
 
-class ThermalPhaser: Weapon() {
+import utils.UserPromptGenerator
 
-    val userPromptGenerator = getuserPromptGenerator()
+class ThermalPhaser: Weapon{
 
-    override var damage: Int = 10
+    override var damage = 10
+    override val userPromptGenerator = UserPromptGenerator()
+    override val itemValue = 30
 
     override fun describe() {
         userPromptGenerator.printText(arrayOf("The Thermal Phaser is a high speed phaser weapon that utilzes the " +
@@ -14,6 +16,6 @@ class ThermalPhaser: Weapon() {
                 "Compatible with the following class of ships: Epoch & Halison"))
     }
 
-    fun getWeaponName(): String{ return "The Thermal Phaser" }
+    override fun getWeaponName(): String{ return "The Thermal Phaser" }
 
 }

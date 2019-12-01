@@ -1,9 +1,12 @@
 package weapons
 
-class AtlasPlasma: Weapon() {
+import utils.UserPromptGenerator
 
-    val userPromptGenerator = getuserPromptGenerator()
-    override var damage = 20;
+class AtlasPlasma: Weapon{
+
+    override var damage = 20
+    override val userPromptGenerator = UserPromptGenerator()
+    override val itemValue = 50
 
     override fun describe() {
         userPromptGenerator.printText(arrayOf("The Atlas Plasma Weapon is a plasma based weapon. " +
@@ -13,8 +16,6 @@ class AtlasPlasma: Weapon() {
                 "Compatible with the following class of ships: Epoch & Halison"))
     }
 
-    fun getWeaponName(): String{
-        return "The Atlas Plasma Weapon"
-    }
+    override fun getWeaponName(): String{ return "The Atlas Plasma Weapon" }
 
 }

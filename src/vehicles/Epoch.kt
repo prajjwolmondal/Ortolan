@@ -1,11 +1,12 @@
 package vehicles
 
 import weapons.VoidCannon
+import weapons.Weapon
 
 
 class Epoch(var shipName: String) :Ship(shipName) {
 
-    private var weapon: VoidCannon = VoidCannon()
+    var weapon: Weapon = VoidCannon()
 
     private var criticalMultiplier: Double = 0.5
 
@@ -13,6 +14,10 @@ class Epoch(var shipName: String) :Ship(shipName) {
         val weaponDamage: Int = (this.weapon.damage + this.weapon.damage*criticalMultiplier).toInt()
         print("Firing ${this.weapon.getWeaponName()}. It does $weaponDamage damage to the enemy's hull. ")
         return weaponDamage
+    }
+
+    fun changeWeapon(newWeapon: Weapon){
+        this.weapon = newWeapon
     }
 
 }

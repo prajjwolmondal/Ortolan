@@ -1,10 +1,12 @@
 package weapons
 
-class Starshatterer: Weapon() {
+import utils.UserPromptGenerator
 
-    val userPromptGenerator = getuserPromptGenerator()
+class Starshatterer: Weapon{
 
-    override var damage: Int = 50
+    override var damage = 50
+    override val userPromptGenerator = UserPromptGenerator()
+    override val itemValue = 100
 
     override fun describe() {
         userPromptGenerator.printText(arrayOf("The Star Shatterer is a very powerful experimental weapon. Tbh we're" +
@@ -15,6 +17,6 @@ class Starshatterer: Weapon() {
                 "Compatible with the following class of ships: Epoch & Halison"))
     }
 
-    fun getWeaponName(): String{ return "The Star Shatterer" }
+    override fun getWeaponName(): String{ return "The Star Shatterer" }
 
 }

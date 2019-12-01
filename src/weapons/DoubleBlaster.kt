@@ -1,8 +1,12 @@
 package weapons
 
-class `Rens Double Blaster`: Weapon() {
+import utils.UserPromptGenerator
 
-    val userPromptGenerator = getuserPromptGenerator()
+class DoubleBlaster: Weapon{
+
+    override var damage = 10
+    override val userPromptGenerator = UserPromptGenerator()
+    override val itemValue = 75
 
     override fun describe() {
         userPromptGenerator.printText(arrayOf("Ren's Double blaster is a heavy artillery weapon that utilizes titanium" +
@@ -13,6 +17,6 @@ class `Rens Double Blaster`: Weapon() {
                 "Compatible with the following class of ships: Epoch & Halison"))
     }
 
-    fun getWeaponName(): String{ return "Rens Double Blaster" }
+    override fun getWeaponName(): String{ return "Rens Double Blaster" }
 
 }

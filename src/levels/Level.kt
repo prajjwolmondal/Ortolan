@@ -34,8 +34,6 @@ open class Level(private var playerModel: Player) {
             response = userPromptGenerator.getIntResponse(arrayOf("Attack enemy ship", "Repair your ship"))
             if (response==0) {
                 levelShip.takeDamage(playerShip.fireWeapons())
-            }else if (response==666) {
-                levelShip.takeDamage(levelShip.getHealth())
             }
             else playerShip.repairShip()
             if (this.levelShip.getHealth() > 0) playerShip.takeDamage(this.levelShip.fireWeapons())
@@ -62,13 +60,13 @@ open class Level(private var playerModel: Player) {
 
     private fun awardPlayerRewards(){
         var creditAwarded = 0
-        creditAwarded = if (playerModel.credits <=50) {
-            (playerModel.credits * .25).toInt()
+        creditAwarded = if (this.playerModel.credits <=50) {
+            (this.playerModel.credits * .25).toInt()
         } else {
-            (playerModel.credits * .10).toInt()
+            (this.playerModel.credits * .10).toInt()
         }
-        playerModel.addCredits(creditAwarded)
-        playerModel.ship.modifyFuel(-1)
+        this.playerModel.addCredits(creditAwarded)
+        this.playerModel.ship.modifyFuel(-1)
 
     }
 
