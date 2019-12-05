@@ -38,6 +38,7 @@ open class Ship( private var shipName: String, private var shipClass: String = "
                 } else {
                     this.fuelLeft + modifyAmt
                 }
+            userPromptGenerator.printText("You have ${this.fuelLeft} fuel left")
             }
         } else {
             if (this.fuelLeft+modifyAmt <= 0){
@@ -45,7 +46,6 @@ open class Ship( private var shipName: String, private var shipClass: String = "
             }
             this.fuelLeft += modifyAmt
         }
-        userPromptGenerator.printText("You have ${this.fuelLeft} fuel left")
     }
 
     fun repairShip() {

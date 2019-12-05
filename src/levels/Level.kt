@@ -26,33 +26,34 @@ open class Level(private var playerModel: Player) {
     open fun levelTurn(nextLevelName: String) {
         //TODO: Implement the level damages (some will disrupt shield, some will damage hull)
 
-        val playerShip = this.playerModel.ship
         var response: Int = 0
+        this.playerModel.ship.modifyFuel(-1)
 
-        while ((playerShip.health>0) and (levelShip.getHealth()>0)){
+        while ((this.playerModel.ship.health>0) and (levelShip.health>0)){
             userPromptGenerator.printText("You can do the following: ")
             response = userPromptGenerator.getIntResponse(arrayOf("Attack enemy ship", "Repair your ship"))
             if (response==0) {
-                levelShip.takeDamage(playerShip.fireWeapons())
+                levelShip.takeDamage(this.playerModel.ship.fireWeapons())
             }
-            else playerShip.repairShip()
-            if (this.levelShip.getHealth() > 0) playerShip.takeDamage(this.levelShip.fireWeapons())
+            else this.playerModel.ship.repairShip()
+            if (this.levelShip.health > 0) this.playerModel.ship.takeDamage(this.levelShip.fireWeapons())
         }
         userPromptGenerator.printText("Congratulations! You've defeated ${this.levelShip.getShipName()}")
+        endLevel(nextLevelName)
+    }
 
-        //TODO: Award player rewards for winning battle (fuel & credits)
+    open fun endLevel(nextLevelName: String){
         awardPlayerRewards()
-
         userPromptGenerator.printText("What would you like to do to celebrate your victory?")
-        response = 1
+        var response:Int = 1
         while (response!=0){
             response = userPromptGenerator.getIntResponse(arrayOf("Move on", "Repair your ship", "Rename your ship"))
             if (response==1) {
-                playerShip.repairShip()
+                this.playerModel.ship.repairShip()
             }
             else if (response==2) {
                 val newShipName = userPromptGenerator.getStringInput("What would you like to call your ship?")
-                playerShip.renameShip(newShipName)
+                this.playerModel.ship.renameShip(newShipName)
             }
         }
         userPromptGenerator.printText("You engage your engine drive and head towards $nextLevelName")
@@ -66,8 +67,6 @@ open class Level(private var playerModel: Player) {
             (this.playerModel.credits * .10).toInt()
         }
         this.playerModel.addCredits(creditAwarded)
-        this.playerModel.ship.modifyFuel(-1)
-
     }
 
     open fun getuserPromptGenerator(): UserPromptGenerator{

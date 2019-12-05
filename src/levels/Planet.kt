@@ -2,7 +2,7 @@ package levels
 
 import user.Player
 
-class Planet constructor(private val planetName: String, playerModel: Player) : Level(playerModel) {
+class Planet constructor(private val planetName: String, private val playerModel: Player) : Level(playerModel) {
 
     override fun getLevelName(): String {
         return this.planetName
