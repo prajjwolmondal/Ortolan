@@ -11,7 +11,7 @@ open class Ship( private var shipName: String, private var shipClass: String = "
 
     private var fuelLeft: Int = 3
     private var licenceNum: String = "XTNT40-1E"
-    private var repairAmnt: Int = 10
+    private var repairAmnt: Int = 70    //TODO: Set back to 10
     private var crewCount: Int = 1
     private val userPromptGenerator = UserPromptGenerator()
 
@@ -20,10 +20,9 @@ open class Ship( private var shipName: String, private var shipClass: String = "
     fun takeDamage(damage: Int) {
         this.health -= damage
         if (this.health <= 0) {
-            userPromptGenerator.printText(
-                    "The last shot ruptures your engine drive, causing an explosion to rupture through the " +
-                            "${this.shipName}."
-            )
+            userPromptGenerator.printText("The last shot ruptures your engine drive, causing an explosion " +
+                    "to rupture through the ${this.shipName}.")
+            gameOver()
         } else {
             userPromptGenerator.printText("${this.shipName} health is now at: ${this.health}")
         }
@@ -49,8 +48,7 @@ open class Ship( private var shipName: String, private var shipClass: String = "
     }
 
     fun repairShip() {
-        this.health += this.repairAmnt
-        if (this.health > 100) this.health = 100
+        this.health = if (this.health+repairAmnt > 100) 100 else this.health+repairAmnt
         userPromptGenerator.printText("Ship health is now at: ${this.health}")
     }
 

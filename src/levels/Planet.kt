@@ -2,7 +2,8 @@ package levels
 
 import user.Player
 
-class Planet constructor(private val planetName: String, private val playerModel: Player) : Level(playerModel) {
+class Planet constructor(private val planetName: String, private val planetPopulation: String,
+                         private val planetDescription: String, private val playerModel: Player) : Level(playerModel) {
 
     override fun getLevelName(): String {
         return this.planetName
@@ -10,9 +11,8 @@ class Planet constructor(private val planetName: String, private val playerModel
 
     override fun startLevel(levelName: String) {
         val userPromptGenerator = getuserPromptGenerator()
-        //TODO: Describe arrival at planet, followed by a random description
-        userPromptGenerator.printText(arrayOf("Just as you complete the jump to $planetName you see that " +
-                "you're facing a Pirate ship", "Pirates: You're fucking screwed!"))
+        userPromptGenerator.printText(arrayOf("You complete your jump to ${this.planetName} without any issues.",
+                this.planetDescription, "Population: "+this.planetPopulation))
         levelTurn(levelName)
     }
 

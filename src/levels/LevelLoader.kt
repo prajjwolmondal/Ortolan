@@ -2,47 +2,46 @@ package levels
 
 import user.Player
 import utils.UserPromptGenerator
-import kotlin.random.Random
+import java.io.File
 
-class LevelLoader(player: Player) {
+class LevelLoader(private var playerModel: Player) {
 
-    private var playerModel: Player = player
-    private val introLvl = Intro(playerModel)
-    private var planetNames = arrayListOf<String>("Tritan","OA", "Planet J586", "Reach", "Chiron")
+    private val introLvl = Intro(this.playerModel)
+    private var planets = returnPlanets()
     private val userPromptGenerator = UserPromptGenerator()
 
-    private fun getRandomPlanetName(): String{
-        val planetIndex =  Random.nextInt(0, planetNames.size)
-        val planetName = planetNames[planetIndex]
-        planetNames.removeAt(planetIndex)
-        return planetName
+    private fun returnPlanets(): MutableList<Planet>{
+//        val planetIndex =  Random.nextInt(0, planetNames.size)
+        val planetFileReader = File("src/levels/resources/PlanetInfo.txt").bufferedReader()
+        val planetList: MutableList<Planet> = mutableListOf()
+        planetFileReader.forEachLine {line ->
+            val planetInfo = line.split(";")
+            planetList.add(Planet(planetInfo[0], planetInfo[1], planetInfo[2], this.playerModel))
+        }
+        return planetList
     }
 
     fun runLevels(){
 
         // TODO: Move planet initialization to individual Level level with each level running the next level
-        val planet1a = Planet(getRandomPlanetName(), playerModel)
-        val planet1b = Planet(getRandomPlanetName(), playerModel)
-        val outpost = Outpost(playerModel)
-        val anomaly = Anomaly(playerModel)
-        val astroidBelt = AstroidBelt(playerModel)
-        val planet2a = Planet(getRandomPlanetName(), playerModel)
-        val planet2b = Planet(getRandomPlanetName(), playerModel)
-        val boss = Boss(playerModel)
+        val outpost = Outpost(this.playerModel)
         this.introLvl.startLevel(outpost.getLevelName())
-        when (getPlayersNextMove(planet1a, planet1b)){
-            0 -> planet1a.startLevel(outpost.getLevelName())
-            1 -> planet1b.startLevel(outpost.getLevelName())
+        when (getPlayersNextMove(planets[0], planets[1])){
+            0 -> planets[0].startLevel(outpost.getLevelName())
+            1 -> planets[1].startLevel(outpost.getLevelName())
         }
         outpost.startLevel(outpost.getLevelName())
+        val anomaly = Anomaly(this.playerModel)
+        val astroidBelt = AstroidBelt(this.playerModel)
         when (getPlayersNextMove(anomaly, astroidBelt)){
             0 -> anomaly.startLevel(outpost.getLevelName())
             1 -> astroidBelt.startLevel(outpost.getLevelName())
         }
         outpost.startLevel(outpost.getLevelName())
-        when (getPlayersNextMove(planet2a, planet2b)){
-            0 -> planet2a.startLevel(outpost.getLevelName())
-            1 -> planet2b.startLevel(outpost.getLevelName())
+        val boss = Boss(this.playerModel)
+        when (getPlayersNextMove(planets[2], planets[3])){
+            0 -> planets[2].startLevel(outpost.getLevelName())
+            1 -> planets[3].startLevel(outpost.getLevelName())
         }
         outpost.startLevel(outpost.getLevelName())
         boss.startLevel(outpost.getLevelName())

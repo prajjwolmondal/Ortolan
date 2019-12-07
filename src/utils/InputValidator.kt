@@ -11,7 +11,7 @@ fun getValidString(userQuestion: String, specialResponse: String = ""): String {
                 println("Sigh...it cannot be this complicated can it? ")
                 if (specialResponse.isNotBlank()) println(specialResponse)
             } else {
-                print("Invalid response. Please try again. ")
+                print("Invalid string. Please try again. ")
                 println(userQuestion)
             }
             input = readLine()
@@ -34,7 +34,7 @@ fun getValidInt(userQuestion: String, validValueRange: Int, specialResponse: Str
                 if (input.toInt() in 0..validValueRange) {
                     valid = true
                 } else{
-                    print("Invalid response. Please try again. ")
+                    print("Invalid number given. Please try again. ")
                     println(userQuestion)
                 }
             }
@@ -43,11 +43,11 @@ fun getValidInt(userQuestion: String, validValueRange: Int, specialResponse: Str
                 println("Sigh...it cannot be this complicated can it? ")
                 if (specialResponse.isNotBlank()) println(specialResponse)
             } else {
-                print("Invalid response. Please try again. ")
+                print("Invalid number given. Please try again. ")
                 println(userQuestion)
             }
-            input = readLine()
         }
+        input = readLine()
         specialResponseCounter += 1
     }
     return input!!.toInt()
@@ -65,7 +65,7 @@ fun getValidYesOrNo(userQuestion: String, specialResponse: String): String{
                 println("Sigh...it cannot be this complicated can it? ")
                 if (specialResponse.isNotBlank()) println(specialResponse)
             } else {
-                print("Invalid response. Please try again. ")
+                print("Invalid response, needs to be \"y\" or \"n\". Please try again. ")
                 println(userQuestion)
             }
             input = readLine()
