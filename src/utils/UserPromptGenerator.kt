@@ -14,8 +14,13 @@ class UserPromptGenerator {
     private val defaultSpecialResponse = ""
 
     fun getStringInput(userQuestion: String = defaultUserQuestion,
-                       specialResponse: String = defaultSpecialResponse): String{
-        return getValidString(userQuestion, specialResponse)
+                       specialResponse: String = defaultSpecialResponse, isYNquestion: Boolean = false): String{
+        return if (isYNquestion) {
+            getValidYesOrNo(userQuestion, "There's literally only 2 possible characters....")
+        }
+        else {
+            getValidString(userQuestion, specialResponse)
+        }
     }
 
     fun getStringInput(inputs: Array<String>, userQuestion: String = defaultUserQuestion,
@@ -26,13 +31,13 @@ class UserPromptGenerator {
 
     fun getIntResponse(userQuestion: String = defaultUserQuestion,
                        specialResponse: String = defaultSpecialResponse): Int{
-        return getValidInt(userQuestion, specialResponse)
+        return getValidInt(userQuestion, -1, specialResponse)
     }
 
     fun getIntResponse(inputs: Array<String>, userQuestion: String = defaultUserQuestion,
                        specialResponse: String = defaultSpecialResponse): Int{
         printOptions(inputs)
-        return getValidInt(userQuestion, specialResponse)
+        return getValidInt(userQuestion, inputs.size, specialResponse)
     }
 
     fun printText(input: String){

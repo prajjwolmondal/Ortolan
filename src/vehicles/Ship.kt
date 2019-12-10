@@ -21,8 +21,8 @@ open class Ship( private var shipName: String, private var shipClass: String = "
         this.health -= damage
         if (this.health <= 0) {
             userPromptGenerator.printText(
-                    "The last shot ruptures the engine drive causing an explosion to rupture through the " +
-                            "${this.shipName}. Game over."
+                    "The last shot ruptures your engine drive, causing an explosion to rupture through the " +
+                            "${this.shipName}."
             )
         } else {
             userPromptGenerator.printText("${this.shipName} health is now at: ${this.health}")
