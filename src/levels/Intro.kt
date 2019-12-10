@@ -20,7 +20,7 @@ class Intro(private var playerModel: Player) : Level(playerModel) {
         val questions = arrayOf("Accept the mission", "I don't need this shit. Find someone else")
         playerResponse = askPlayerForResponse(questions)
         if (playerResponse==1){
-            userPromptGenerator.printText("Expom Command: You ")
+            userPromptGenerator.printText(arrayOf("Expom Command: You fucking idiot","You: Yup, that's me. Fuck off!"))
             gameOver()
         } else {
             userPromptGenerator.printText("<Opening dock>")

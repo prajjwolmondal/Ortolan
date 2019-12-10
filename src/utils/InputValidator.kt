@@ -25,8 +25,9 @@ fun getValidInt(userQuestion: String, validValueRange: Int, specialResponse: Str
     var valid = false
     var specialResponseCounter = 0
     println(userQuestion)
-    var input: String? = readLine()
+    var input: String? = ""
     while (!valid){
+        input = readLine()
         if (input != null && input.isNotEmpty()) {
             if (validValueRange==-1){
                 valid = true
@@ -47,7 +48,6 @@ fun getValidInt(userQuestion: String, validValueRange: Int, specialResponse: Str
                 println(userQuestion)
             }
         }
-        input = readLine()
         specialResponseCounter += 1
     }
     return input!!.toInt()
