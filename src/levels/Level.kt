@@ -29,11 +29,11 @@ open class Level(private var playerModel: Player) {
         var response: Int = 0
         this.playerModel.ship.modifyFuel(-1)
 
-        while ((this.playerModel.ship.health>0) and (levelShip.health>0)){
+        while ((this.playerModel.ship.health>0) and (this.levelShip.health>0)){
             userPromptGenerator.printText("You can do the following: ")
             response = userPromptGenerator.getIntResponse(arrayOf("Attack enemy ship", "Repair your ship"))
             if (response==0) {
-                levelShip.takeDamage(this.playerModel.ship.fireWeapons())
+                this.levelShip.takeDamage(this.playerModel.ship.fireWeapons())
             }
             else this.playerModel.ship.repairShip()
             if (this.levelShip.health > 0) this.playerModel.ship.takeDamage(this.levelShip.fireWeapons())
@@ -73,7 +73,7 @@ open class Level(private var playerModel: Player) {
         return this.userPromptGenerator
     }
 
-    open fun startLevel(levelName: String) {
+    open fun startLevel(nextLevelName: String) {
         this.userPromptGenerator.printText("startLevel() not implemented :(")
 
     }

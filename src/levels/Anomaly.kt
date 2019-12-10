@@ -11,12 +11,12 @@ class Anomaly (private val playerModel: Player): Level(playerModel) {
     private var userPromptGenerator: UserPromptGenerator = UserPromptGenerator()
     private val levelShip: EnemyShip = EnemyShip()
 
-    override fun startLevel(levelName: String) {
+    override fun startLevel(nextLevelName: String) {
         val userPromptGenerator = getuserPromptGenerator()
-        //TODO: Describe arrival at planet, followed by a random description
         userPromptGenerator.printText(arrayOf("You arrive at a $anomolyName. You notice that the storm is messing up " +
-                "ships electrical system.", "Pirates: You're fucking screwed!"))
-        this.levelTurn(levelName)
+                "ships electrical system. Luckily your systems seem to withstanding it for now. You get pinged by an" +
+                "incoming ship", "Pirates: What a fucking terrible mistake you made coming here"))
+        this.levelTurn(nextLevelName)
     }
 
     override fun levelTurn(nextLevelName: String) {

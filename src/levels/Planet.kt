@@ -9,11 +9,11 @@ class Planet constructor(private val planetName: String, private val planetPopul
         return this.planetName
     }
 
-    override fun startLevel(levelName: String) {
+    override fun startLevel(nextLevelName: String) {
         val userPromptGenerator = getuserPromptGenerator()
         userPromptGenerator.printText(arrayOf("You complete your jump to ${this.planetName} without any issues.",
                 this.planetDescription, "Population: "+this.planetPopulation))
-        levelTurn(levelName)
+        this.levelTurn(nextLevelName)
     }
 
 }

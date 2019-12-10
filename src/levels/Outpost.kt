@@ -13,7 +13,7 @@ class Outpost (private val playerModel: Player): Level(playerModel) {
         return "Outpost"
     }
 
-    override fun startLevel(levelName: String) {
+    override fun startLevel(nextLevelName: String) {
         var userResponse = 0
         this.userPromptGenerator.printText("You arrive at an outpost. You dock the ship and open the trading terminal.")
         this.userPromptGenerator.printText("Outpost trader: Welcome to our humble establishment. " +
@@ -84,6 +84,7 @@ class Outpost (private val playerModel: Player): Level(playerModel) {
                 "${this.playerModel.ship.weapon.getWeaponName()}?(Y/N)", "I ", true)
         when (userResponse) {
             "y" -> {
+                //TODO: Need to actually remove weapon from users ship
                 this.userPromptGenerator.printText("Amazing, depositing ${this.playerModel.ship.weapon.itemValue} " +
                         "credits into your account now.")
                 this.playerModel.addCredits(this.playerModel.ship.weapon.itemValue)

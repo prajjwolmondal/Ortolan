@@ -11,7 +11,6 @@ class LevelLoader(private var playerModel: Player) {
     private val userPromptGenerator = UserPromptGenerator()
 
     private fun returnPlanets(): MutableList<Planet>{
-//        val planetIndex =  Random.nextInt(0, planetNames.size)
         val planetFileReader = File("src/levels/resources/PlanetInfo.txt").bufferedReader()
         val planetList: MutableList<Planet> = mutableListOf()
         planetFileReader.forEachLine {line ->
@@ -32,18 +31,19 @@ class LevelLoader(private var playerModel: Player) {
         }
         outpost.startLevel(outpost.getLevelName())
         val anomaly = Anomaly(this.playerModel)
-        val astroidBelt = AstroidBelt(this.playerModel)
+        val astroidBelt = AsteroidBelt(this.playerModel)
         when (getPlayersNextMove(anomaly, astroidBelt)){
             0 -> anomaly.startLevel(outpost.getLevelName())
             1 -> astroidBelt.startLevel(outpost.getLevelName())
         }
         outpost.startLevel(outpost.getLevelName())
-        val boss = Boss(this.playerModel)
+        //TODO: Fix bug where the last two planets starts but game is over after opening blurb
         when (getPlayersNextMove(planets[2], planets[3])){
             0 -> planets[2].startLevel(outpost.getLevelName())
             1 -> planets[3].startLevel(outpost.getLevelName())
         }
         outpost.startLevel(outpost.getLevelName())
+        val boss = Boss(this.playerModel)
         boss.startLevel(outpost.getLevelName())
     }
 

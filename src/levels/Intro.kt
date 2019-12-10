@@ -6,7 +6,7 @@ class Intro(private var playerModel: Player) : Level(playerModel) {
 
     private val userPromptGenerator = getuserPromptGenerator()
 
-    override fun startLevel(levelName: String) {
+    override fun startLevel(nextLevelName: String) {
         userPromptGenerator.printText(
             arrayOf(
                 "You open the door to you helm and head for the mainframe. You enter your credentials. It " +
