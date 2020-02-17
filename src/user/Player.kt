@@ -13,8 +13,7 @@ class Player constructor(var name: String, val age: Int, var ship: Epoch) {
     }
 
     fun printStats() {
-        userPromptGenerator.printText(arrayOf("You've got ${this.credits} credits",
-                "You're the captain of the ${this.ship.shipName}"))
+        userPromptGenerator.printText("You've got ${this.credits} credits")
     }
 
     fun retractCredits(retractAmt: Int){
