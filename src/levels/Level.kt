@@ -9,7 +9,7 @@ open class Level(private var playerModel: Player) {
 
     private var userPromptGenerator: UserPromptGenerator = UserPromptGenerator()
     private lateinit var nextLevel: Level
-    private val levelShip: EnemyShip = EnemyShip()
+    private val levelShip: EnemyShip = EnemyShip("The Doomsday")
 
     open fun setNextLevel(level: Level) {
         this.nextLevel = level
@@ -38,7 +38,7 @@ open class Level(private var playerModel: Player) {
             else this.playerModel.ship.repairShip()
             if (this.levelShip.health > 0) this.playerModel.ship.takeDamage(this.levelShip.fireWeapons())
         }
-        userPromptGenerator.printText("Congratulations! You've defeated ${this.levelShip.getShipName()}")
+        userPromptGenerator.printText("Congratulations! You've defeated ${this.levelShip.shipName}")
         endLevel(nextLevelName)
     }
 

@@ -9,7 +9,7 @@ class AsteroidBelt(private val playerModel: Player) : Level(playerModel) {
 
     private val asteroidBeltName = "asteroid belt"
     private var userPromptGenerator: UserPromptGenerator = UserPromptGenerator()
-    private val levelShip: EnemyShip = EnemyShip()
+    private val levelShip: EnemyShip = EnemyShip("ASTROTHUNDER")
 
     override fun startLevel(nextLevelName: String) {
         val userPromptGenerator = getuserPromptGenerator()
@@ -57,7 +57,7 @@ class AsteroidBelt(private val playerModel: Player) : Level(playerModel) {
             this.playerModel.ship.takeDamage(this.levelShip.fireWeapons())
             levelDamage()
         }
-        this.userPromptGenerator.printText("Congratulations! You've defeated ${this.levelShip.getShipName()}")
+        this.userPromptGenerator.printText("Congratulations! You've defeated ${this.levelShip.shipName}")
         endLevel(nextLevelName)
     }
 
@@ -68,7 +68,7 @@ class AsteroidBelt(private val playerModel: Player) : Level(playerModel) {
             this.levelShip.health -= levelDamageAmt
             this.userPromptGenerator.printText(arrayOf("The $asteroidBeltName causes a short circuit of both your and the " +
                     "enemy ship, resulting in $levelDamageAmt in damage to the hull.", "Your ship health: " +
-                    "${this.playerModel.ship.health} and ${this.levelShip.getShipName()} " +
+                    "${this.playerModel.ship.health} and ${this.levelShip.shipName} " +
                     "health: ${this.levelShip.health}"))
         }
     }

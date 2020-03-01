@@ -17,11 +17,11 @@ open class Ship( private var shipName: String, private var shipClass: String = "
 
     //TODO: Add the weapon vars
 
-    fun takeDamage(damage: Int) {
+    open fun takeDamage(damage: Int) {
         this.health -= damage
         if (this.health <= 0) {
-            userPromptGenerator.printText("The last shot ruptures your engine drive, causing an explosion " +
-                    "to rupture through the ${this.shipName}.")
+            userPromptGenerator.printText("The last shot ruptures the engine drive, causing an explosion " +
+                    "to tear through the ${this.shipName}. Number of crew remaining: 0")
             gameOver()
         } else {
             userPromptGenerator.printText("${this.shipName} health is now at: ${this.health}")
@@ -64,7 +64,7 @@ open class Ship( private var shipName: String, private var shipClass: String = "
     }
 
     private fun gameOver() {
-        print("Game over")
+        userPromptGenerator.printText("Game over")
         exitProcess(0)
     }
 
@@ -73,12 +73,16 @@ open class Ship( private var shipName: String, private var shipClass: String = "
             "Halison" -> println()
             "Poseidon" -> println()
             "Shiva" -> println()
-            else -> {
+            "Epoch" -> {
                 userPromptGenerator.printText(
-                        "You own the ${this.shipName}. A ${this.shipClass} class vehicle. Its got one main engine, and " +
-                                "one main artillery cannon. Its got rooms for a 4 person crew, although you could probably " +
-                                "squeeze in about 10. The ships licence number is: ${this.licenceNum}"
+                        "You own the ${this.shipName}. A ${this.shipClass} class vehicle. Its got one main" +
+                                " engine, and one main artillery cannon. Its got rooms for a 4 person crew, although" +
+                                " you could probably squeeze in about 10." +
+                                " The ships licence number is: ${this.licenceNum}"
                 )
+            }
+            else -> {
+                userPromptGenerator.printText("You're hailed by a pirate ship calling itself \"${this.shipName}\"")
             }
         }
     }
